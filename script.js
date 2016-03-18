@@ -1,25 +1,12 @@
 $(function() {
 
-  var height = 530;
-  var mainContainer = ".mapContainer";
-  shaper();
-  $(window).resize(function() {
-    shaper();
-  });
-  function shaper() {
-    var top = $(".graphicHeader").height() + $(".explainer").height() + $(".sourceline").height() + $(".smallByline").height();
-    var leftover = height - top;
-    console.log(leftover);
-    $(mainContainer).css("height",leftover + "px");
-  }
-
   var lightNoLabels = new L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
   });
   var year = "09";
   var map = new L.Map('map', {
     center: new L.LatLng(41.819824,-72.581177),
-    zoom: 9,
+    zoom: 10,
     scrollWheelZoom: false,
     layers: [lightNoLabels]
   });
@@ -49,11 +36,6 @@ $(function() {
   }).addTo(map);
 }
 
-
-
-
-
-
 function highlightFeature(e) {
   var layer = e.target;
 
@@ -62,9 +44,6 @@ function highlightFeature(e) {
     color: '#000'
   });
 
-  if (!L.Browser.ie && !L.Browser.opera) {
-    layer.bringToFront();
-  }
   info.update(layer.feature.properties);
 }
 
@@ -81,11 +60,8 @@ function onEachFeature(feature, layer) {
   });
 }
 
-
-
-
 function getColor(d) {
-  console.log(d);
+  // console.log(d);
   if (d > -1) {
     return d > .05  ? '#7f0000' :
     d > .045  ? '#b30000' :
@@ -116,9 +92,6 @@ info.update = function (props) {
   var winName =
   this._div.innerHTML = (props ?
     '<div class="townName">' + props.name.toProperCase() + '</div>' : '<div class="townName faded">Hover over towns</div>') + '<div class="labelItem"><div class="rightLabel">Choice Students</div>' +(props ? '' + (checkNull(props["choice" + year])) : '--') + '</div>' + '<div class="labelItem"><div class="rightLabel">Total Students</div>' +(props ? '' + checkNull(props["total" + year]) : '--') + '</div>' + '<div class="labelItem"><div class="rightLabel">Percentage</div>' +(props ? '' + checkThePct( props["choice" + year], props["total" + year]) : '--') + '</div>' ;
-  if ($("#usage").html() == "null gallons per month") {
-    $("#usage").html("Not available");
-  }
 };
 
 info.addTo(map);
