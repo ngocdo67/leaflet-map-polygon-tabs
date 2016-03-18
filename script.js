@@ -92,9 +92,6 @@ info.update = function (props) {
   var winName =
   this._div.innerHTML = (props ?
     '<div class="townName">' + props.name.toProperCase() + '</div>' : '<div class="townName faded">Hover over towns</div>') + '<div class="labelItem"><div class="rightLabel">Choice Students</div>' +(props ? '' + (checkNull(props["choice" + year])) : '--') + '</div>' + '<div class="labelItem"><div class="rightLabel">Total Students</div>' +(props ? '' + checkNull(props["total" + year]) : '--') + '</div>' + '<div class="labelItem"><div class="rightLabel">Percentage</div>' +(props ? '' + checkThePct( props["choice" + year], props["total" + year]) : '--') + '</div>' ;
-  if ($("#usage").html() == "null gallons per month") {
-    $("#usage").html("Not available");
-  }
 };
 
 info.addTo(map);
