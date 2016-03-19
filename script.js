@@ -102,7 +102,8 @@ info.addTo(map);
 $(".toolItem").click(function() {
   $(".toolItem").removeClass("selected");
   $(this).addClass("selected");
-  year = $(this).html().split("-")[1];
+  // year = $(this).html().split("-")[1];  /* for school years */
+  year = $(this).html();
   geoJsonLayer.setStyle(style);
 });
 
