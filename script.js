@@ -18,9 +18,9 @@ $(function() {
   function style(feature) {
     return {
      fillColor: getColor(feature.properties["index" + year]),
-     weight: 0.3,
+     weight: 1,
      opacity: 1,
-     color: '#444',
+     color: 'black',
      fillOpacity: 0.7
    };
 
@@ -48,8 +48,8 @@ function highlightFeature(e) {
   var layer = e.target;
 
   layer.setStyle({
-    weight: 2,
-    color: '#000'
+    weight: 3,
+    color: 'black'
   });
 
   info.update(layer.feature.properties);
@@ -68,21 +68,15 @@ function onEachFeature(feature, layer) {
   });
 }
 
+// Edit ranges and colors to match your data; see http://colorbrewer.org
 function getColor(d) {
-  // console.log(d);
-  if (d > 0) {
-    return d > .1  ? '#7f0000' :
-    d > .5  ? '#b30000' :
-    d > 1.0   ? '#d7301f' :
-    d > 1.5   ? '#ef6548' :
-    d > 2.0   ? '#fc8d59' :
-    d > 2.5   ? '#fdbb84' :
-    '#FAF6F0';
-  } else {
-    return "#ffffff";
-  }
+  return d > 2 ? '#800026' :
+         d > 1.5 ? '#BD0026' :
+         d > 1  ? '#E31A1C' :
+         d > 0.5  ? '#FC4E2A' :
+         d > 0  ? '#FD8D3C' :
+                    '#ffffff';
 }
-
 
 var info = L.control();
 
