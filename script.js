@@ -14,17 +14,17 @@ $(function() {
   map.attributionControl
   .setPrefix('View <a href="http://github.com/jackdougherty/leaflet-map-polygon-tabs">code on GitHub</a>, created with <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>; design by <a href="http://ctmirror.org">CT Mirror</a>');
 
-
-  function style(feature) {
-    return {
+ // Edit the getColor property to match data column header in your GeoJson file
+ function style(feature) {
+   return {
      fillColor: getColor(feature.properties["index" + year]),
      weight: 1,
      opacity: 1,
      color: 'black',
-     fillOpacity: 0.7
+     fillOpacity: 0.7,
    };
-
  }
+
 
 
 //  var geojson;
@@ -44,19 +44,22 @@ $.getJSON("towns-index.geojson", function (data) {
   }).addTo(map);
 });
 
+// this highlights the layer on hover
 function highlightFeature(e) {
   var layer = e.target;
 
   layer.setStyle({
-    weight: 3,
-    color: 'black'
+    weight: 4,
+    color: 'black',
+    fillOpacity: 0.7
   });
 
   info.update(layer.feature.properties);
 }
 
+// this resets the highlight after hover moves away; revised
 function resetHighlight(e) {
-  geoJsonLayer.setStyle(e.target);
+  geoJsonLayer.setStyle(style);
   info.update();
 }
 
