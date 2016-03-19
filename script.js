@@ -1,65 +1,71 @@
-$(function() {
+// Edit the initial year to match your GeoJSON data and tabs in index.html
+var year = "1910";
 
-  var lightNoLabels = new L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
-  });
-  var year = "1910";
-  var map = new L.Map('map', {
-    center: new L.LatLng(41.819824,-72.581177),
-    zoom: 10,
-    scrollWheelZoom: false,
-    layers: [lightNoLabels]
-  });
+// Edit the center point and zoom level
+var map = L.map('map', {
+  center: [41.79, -72.6],
+  zoom: 10,
+  scrollWheelZoom: false
+});
 
-  map.attributionControl
-  .setPrefix('View <a href="http://github.com/jackdougherty/leaflet-map-polygon-tabs">code on GitHub</a>, created with <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>; design by <a href="http://ctmirror.org">CT Mirror</a>');
+// Edit links to your GitHub repo and data source credit
+map.attributionControl
+.setPrefix('View <a href="http://github.com/jackdougherty/leaflet-map-polygon-tabs">data and code on GitHub</a>, created with <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>; design by <a href="http://ctmirror.org">CT Mirror</a>');
 
-
-  function style(feature) {
-    return {
-     fillColor: getColor(feature.properties["index" + year]),
-     weight: 0.3,
-     opacity: 1,
-     color: '#444',
-     fillOpacity: 0.7
-   };
-
- }
-
-
-//  var geojson;
-//  makeMap(style);
-//  function makeMap(theStyle) {
-//   geojson = L.geoJson(cityData, {
-//     style: theStyle,
-//     onEachFeature: onEachFeature
-//   }).addTo(map);
-// }
+// Basemap layer
+new L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+}).addTo(map);
 
 // Edit to upload GeoJSON data file from your local directory; removed var = geoJsonLayer since this is declared above
-$.getJSON("towns-index.geojson", function (data) {
+$.getJSON("town-home-value-index.geojson", function (data) {
   geoJsonLayer = L.geoJson(data, {
     style: style,
     onEachFeature: onEachFeature
   }).addTo(map);
 });
 
+// Edit range cutoffs and colors to match your data; see http://colorbrewer.org
+// In this example, any values not in the ranges above displays as white
+function getColor(d) {
+  return d > 2.0 ? '#006d2c' :
+         d > 1.5 ? '#2ca25f' :
+         d > 1.0 ? '#66c2a4' :
+         d > 0.5 ? '#b2e2e2' :
+         d > 0.1 ? '#edf8fb' :
+                   'white' ;
+}
+
+// Edit the getColor property to match data properties in your GeoJSON file
+// In this example, columns follow this pattern: index1910, index1920...
+function style(feature) {
+  return {
+    fillColor: getColor(feature.properties["index" + year]),
+    weight: 1,
+    opacity: 1,
+    color: 'black',
+    fillOpacity: 0.8,
+  };
+}
+
+// This highlights the polygon on hover
 function highlightFeature(e) {
   var layer = e.target;
-
   layer.setStyle({
-    weight: 2,
-    color: '#000'
+    weight: 4,
+    color: 'black',
+    fillOpacity: 0.7
   });
-
   info.update(layer.feature.properties);
 }
 
+// This resets the highlight after hover moves away
 function resetHighlight(e) {
-  geoJsonLayer.setStyle(e.target);
+  geoJsonLayer.setStyle(style);
   info.update();
 }
 
+// This instructs highlight and reset functions on hover movement
 function onEachFeature(feature, layer) {
   layer.on({
     mouseover: highlightFeature,
@@ -68,51 +74,58 @@ function onEachFeature(feature, layer) {
   });
 }
 
-function getColor(d) {
-  // console.log(d);
-  if (d > 0) {
-    return d > .1  ? '#7f0000' :
-    d > .5  ? '#b30000' :
-    d > 1.0   ? '#d7301f' :
-    d > 1.5   ? '#ef6548' :
-    d > 2.0   ? '#fc8d59' :
-    d > 2.5   ? '#fdbb84' :
-    '#FAF6F0';
-  } else {
-    return "#ffffff";
-  }
-}
-
-
+// Creates an info box on the map
 var info = L.control();
-
 info.onAdd = function (map) {
-    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+    this._div = L.DomUtil.create('div', 'info');
     this.update();
     return this._div;
-  };
+};
 
-// method that we will use to update the control based on feature properties passed
+// Edit info box labels (such as props.town) to match properties of the GeoJSON data
 info.update = function (props) {
   var winName =
   this._div.innerHTML = (props ?
-    '<div class="townName">' + props.town.toProperCase() + '</div>' : '<div class="townName faded">Hover over towns</div>') + '<div class="labelItem"><div class="rightLabel">Home Value Index</div>' +(props ? '' + (checkNull(props["index" + year])) : '--') + '</div>';
+    '<div class="areaName">' + props.town + '</div>' : '<div class="areaName faded">Hover over areas</div>') + '<div class="areaLabel"><div class="areaValue">Home Value Index</div>' +(props ? '' + (checkNull(props["index" + year])) : '--') + '</div>';
 };
 
 info.addTo(map);
 
-// Check this
-$(".toolItem").click(function() {
-  $(".toolItem").removeClass("selected");
+// When a new tab is selected, this changes the year displayed
+$(".tabItem").click(function() {
+  $(".tabItem").removeClass("selected");
   $(this).addClass("selected");
-  year = $(this).html().split("-")[1];
+  year = $(this).html();
+  // year = $(this).html().split("-")[1];  /* use for school years, eg 2010-11 */
   geoJsonLayer.setStyle(style);
 });
 
-String.prototype.toProperCase = function () {
-  return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+var legend = L.control({position: 'bottomright'});
+
+// Modify grades to match the range cutoffs inserted above
+// In this example, the last grade will appear as "2+"
+legend.onAdd = function (map) {
+  var div = L.DomUtil.create('div', 'info legend'),
+    grades = [0.1, 0.5, 1.0, 1.5, 2],
+    labels = [],
+    from, to;
+
+  for (var i = 0; i < grades.length; i++) {
+    from = grades[i];
+    to = grades[i + 1];
+
+    labels.push(
+      '<i style="background:' + getColor(from + 1) + '"></i> ' +
+      from + (to ? '&ndash;' + to : '+'));
+  }
+
+  div.innerHTML = labels.join('<br>');
+  return div;
 };
 
+legend.addTo(map);
+
+// In info.update, this checks if GeoJSON data contains a null value, and if so displays "--"
 function checkNull(val) {
   if (val != null || val == "NaN") {
     return comma(val);
@@ -121,6 +134,7 @@ function checkNull(val) {
   }
 }
 
+// Use in info.update if GeoJSON data needs to be displayed as a percentage
 function checkThePct(a,b) {
   if (a != null && b != null) {
     return Math.round(a/b*1000)/10 + "%";
@@ -129,11 +143,10 @@ function checkThePct(a,b) {
   }
 }
 
+// Use info.update if GeoJSON data needs to be displayed with commas (such as 123,456)
 function comma(val){
   while (/(\d+)(\d{3})/.test(val.toString())){
     val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
   }
   return val;
 }
-
-});

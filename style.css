@@ -1,7 +1,8 @@
+/*Edit max-width to fit inside destination iframe*/
 .interactiveContainer {
     float: left;
     width: 100%;
-    max-width: 800px;
+    max-width: 700px;
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
     border: none !important;
@@ -10,7 +11,7 @@
 .mapContainer {
     float: left;
     width: 100%;
-    height: 450px;
+    height: 500px;
     position: relative;
     border: 1px solid #aaa;
 }
@@ -21,21 +22,18 @@
     width: 100%;
     height: 100%;
 }
-.toolHeader {
-    font-weight: bold;
-}
-.toolbar {
+.tabBar {
     float: left;
     width: 100%;
     margin-bottom: 10px;
     font: 14px/16px Arial, Helvetica, sans-serif;
-    display: table-row;
 }
-/* tab width control ; clean up all details later*/
-.toolItem {
+/* Edit tab width based on number to be displayed
+In this example, width = 9% for 10 tabs + cell borders */
+.tabItem {
+    width: 9%;
+    padding: 2px 0px 2px 0px;
     float: left;
-    width: 17%;
-    padding: 5px 10px;
     margin-left: -1px;
     border: #aaa solid 1px;
     border-right: none;
@@ -45,23 +43,22 @@
     font-weight: normal;
     text-transform: uppercase;
     color: #ccc;
-    display: table-cell;
 }
-.toolItem:first-child {
+.tabItem:first-child {
     border-radius: 7px 0px 0 7px;
     border-top-left-radius: 2px;
     border-bottom-left-radius: 2px;
 }
-.toolItem:last-child {
+.tabItem:last-child {
     border-radius: 0px 7px 7px 0px;
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
     border-right: 1px solid #aaa;
 }
-.toolItem:hover {
+.tabItem:hover {
     color: #E34B4B;
 }
-.toolItem.selected {
+.tabItem.selected {
     color: maroon;
     background: #eee;
     box-shadow: inset 1px 1px 7px -2px #555;
@@ -71,20 +68,21 @@
     background: #E34B4B !important;
     pointer-events: none;
 }
+/*Edit width of info box */
 .info {
+    width: 200px;
     padding: 12px 16px;
-    font: 14px/16px "Source Sans Pro", Arial, Helvetica, sans-serif;
+    font: 14px/16px Arial, Helvetica, sans-serif;
     background: white;
     background: rgba(255,255,255,0.8);
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
     border-radius: 5px;
-    width: 200px;
 }
 .info h4 {
     margin: 0 0 5px;
     color: #777;
 }
-.townName {
+.areaName {
     font-size: 17px;
     font-weight: bold;
     margin-bottom: 10px;
@@ -92,59 +90,32 @@
 .faded {
     opacity: 0.4;
 }
-.legend {
-    position: absolute;
-    right: 20px;
-    bottom: 20px;
-}
-.legend i {
-    width: 12px;
-    height: 12px;
-    float: left;
-    margin-right: 8px;
-    opacity: 0.7;
-}
-.legendItem {
-    float: left;
-    height: 16px;
-    font-size: 12px;
-    margin: 5px 10px 5px;
-    font-family: Arial, sans-serif;
-}
-.labelItem {
+.areaLabel {
     float: left;
     width: 100%;
-    font-family: "Source Sans Pro", Arial, sans-serif;
+    font-family: Arial, sans-serif;
 }
-.rightLabel {
+.areaValue {
     float: left;
-    width: 50%;
-    font-size: 10px;
-    text-transform: uppercase;
-    color: maroon;
-    margin-top: 6px;
-    font-family: "Source Sans Pro", Arial, sans-serif;
+    width: 70%;
+    font-size: 14px;
+    /*color: maroon;*/
+    /*margin-top: 1px;*/
+    font-family: Arial, sans-serif;
 }
-
-.runnerup {
-    margin-top: 20px;
+.legend {
+    width: 100px;
+    position: absolute;
+    right: 0px;
+    bottom: 10px;
+    text-align: left;
+    line-height: 18px;
+    color: #555;
 }
-.red, .blue, .green, .none {
-    float: left;
-    width: 14px;
-    height: 14px;
-    margin-right: 4px;
-    border: 1px solid #333;
-}
-.red {
-    background: #FF2121;
-}
-.blue {
-    background: #3421FF;
-}
-.green {
-    background: #49CF32;
-}
-.none {
-    background: #fff;
+.legend i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin-right: 8px;
+  opacity: 0.7;
 }
