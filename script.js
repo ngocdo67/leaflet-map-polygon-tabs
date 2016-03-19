@@ -18,15 +18,15 @@ attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreet
 }).addTo(map);
 
  // Edit the getColor property to match data column header in your GeoJson file
- function style(feature) {
-   return {
-     fillColor: getColor(feature.properties["index" + year]),
-     weight: 1,
-     opacity: 1,
-     color: 'black',
-     fillOpacity: 0.7,
-   };
- }
+function style(feature) {
+  return {
+    fillColor: getColor(feature.properties["index" + year]),
+    weight: 1,
+    opacity: 1,
+    color: 'black',
+    fillOpacity: 0.8,
+  };
+}
 
 // Edit to upload GeoJSON data file from your local directory; removed var = geoJsonLayer since this is declared above
 $.getJSON("towns-index.geojson", function (data) {
@@ -65,12 +65,12 @@ function onEachFeature(feature, layer) {
 
 // Edit ranges and colors to match your data; see http://colorbrewer.org
 function getColor(d) {
-  return d > 2 ? '#800026' :
-         d > 1.5 ? '#BD0026' :
-         d > 1  ? '#E31A1C' :
-         d > 0.5  ? '#FC4E2A' :
-         d > 0  ? '#FD8D3C' :
-                    '#ffffff';
+  return d > 2.0 ? '#006d2c' :
+         d > 1.5 ? '#2ca25f' :
+         d > 1.0 ? '#66c2a4' :
+         d > 0.5 ? '#b2e2e2' :
+         d > 0.1 ? '#edf8fb' :
+                   '#ffffff' ;
 }
 
 var info = L.control();
