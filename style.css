@@ -1,34 +1,20 @@
-/*Edit max-width to fit inside destination iframe*/
 .interactiveContainer {
-    float: left;
     width: 100%;
-    max-width: 700px;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    border: none !important;
     font-family: Arial, sans-serif;
 }
-.mapContainer {
-    float: left;
-    width: 100%;
-    height: 500px;
-    position: relative;
-    border: 1px solid #aaa;
-}
+/* Edit top to fit tabBar height: 35px */
+/* Edit height to display full map: 500px */
 #map {
     position: absolute;
     left: 0;
-    top: 0;
+    top: 35px;
     width: 100%;
-    height: 100%;
+    height: 500px;
 }
 .tabBar {
-    float: left;
-    width: 100%;
-    margin-bottom: 10px;
     font: 14px/16px Arial, Helvetica, sans-serif;
 }
-/* Edit tab width based on number to be displayed
+/* Edit width based on number of tabs to display
 In this example, width = 9% for 10 tabs + cell borders */
 .tabItem {
     width: 9%;
@@ -99,10 +85,9 @@ In this example, width = 9% for 10 tabs + cell borders */
     float: left;
     width: 70%;
     font-size: 14px;
-    /*color: maroon;*/
-    /*margin-top: 1px;*/
     font-family: Arial, sans-serif;
 }
+/*Edit width of legend*/
 .legend {
     width: 100px;
     position: absolute;
