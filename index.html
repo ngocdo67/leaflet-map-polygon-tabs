@@ -8,30 +8,31 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   </body>
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <!-- Current Leaflet is beta. Check for updates at http://leafletjs.com/download.html -->
-  <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.js"></script>
-  <script type="text/javascript" src="script.js"></script>
   <!-- div to display container, tabs, and map; add more for title and caption if desired -->
   <div class="interactiveContainer">
     <div class="tabBar">
-      <div class="tabItem selected">1910</div>
-      <div class="tabItem">1920</div>
-      <div class="tabItem">1930</div>
-      <div class="tabItem">1940</div>
-      <div class="tabItem">1950</div>
-      <div class="tabItem">1960</div>
-      <div class="tabItem">1970</div>
-      <div class="tabItem">1980</div>
-      <div class="tabItem">1990</div>
-      <div class="tabItem">2000</div>
-      <div class="tabItem">2010</div>
+      <!-- to do: find way to use tab index for users to flip through time -->
+      <div tabindex="1" class="tabItem selected">1910</div>
+      <div tabindex="2" class="tabItem">1920</div>
+      <div tabindex="3" class="tabItem">1930</div>
+      <div tabindex="4" class="tabItem">1940</div>
+      <div tabindex="5" class="tabItem">1950</div>
+      <div tabindex="6" class="tabItem">1960</div>
+      <div tabindex="7" class="tabItem">1970</div>
+      <div tabindex="8" class="tabItem">1980</div>
+      <div tabindex="9" class="tabItem">1990</div>
+      <div tabindex="10" class="tabItem">2000</div>
+      <div tabindex="11" class="tabItem">2010</div>
     </div>
     <div class="mapContainer">
-      <div id="map" tabindex="0">
+      <div id="map">
           <!-- remove fixed legend and replace with js legend -->
           <!-- <div id="legend>" class="leaflet-map-pane"><img class="legend" src="legend.png"></div> -->
       </div>
     </div>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Current Leaflet is beta. Check for updates at http://leafletjs.com/download.html -->
+    <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.js"></script>
+    <script type="text/javascript" src="script.js"></script>
 </body>
 </html>

@@ -1,18 +1,21 @@
-$(function() {
+// Edit the initial year
+var year = "1910";
 
-  var lightNoLabels = new L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
-  });
-  var year = "1910";
-  var map = new L.Map('map', {
-    center: new L.LatLng(41.819824,-72.581177),
-    zoom: 10,
-    scrollWheelZoom: false,
-    layers: [lightNoLabels]
-  });
+// Edit the center point and zoom level
+var map = L.map('map', {
+  center: [41.79, -72.6],
+  zoom: 10,
+  scrollWheelZoom: false
+});
 
-  map.attributionControl
-  .setPrefix('View <a href="http://github.com/jackdougherty/leaflet-map-polygon-tabs">code on GitHub</a>, created with <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>; design by <a href="http://ctmirror.org">CT Mirror</a>');
+// Edit links to your GitHub repo and data source credit
+map.attributionControl
+.setPrefix('View <a href="http://github.com/jackdougherty/leaflet-map-polygon-tabs">data and code on GitHub</a>, created with <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>; design by <a href="http://ctmirror.org">CT Mirror</a>');
+
+// basemap layer
+new L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
+attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+}).addTo(map);
 
  // Edit the getColor property to match data column header in your GeoJson file
  function style(feature) {
@@ -123,4 +126,4 @@ function comma(val){
   return val;
 }
 
-});
+// });
