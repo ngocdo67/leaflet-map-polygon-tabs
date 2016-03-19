@@ -1,7 +1,7 @@
 .interactiveContainer {
     float: left;
     width: 100%;
-    max-width: 800px;
+    max-width: 700px;
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
     border: none !important;
@@ -10,7 +10,7 @@
 .mapContainer {
     float: left;
     width: 100%;
-    height: 450px;
+    height: 500px;
     position: relative;
     border: 1px solid #aaa;
 }
@@ -34,8 +34,8 @@
 /* tab width control ; clean up all details later*/
 .toolItem {
     float: left;
-    width: 17%;
-    padding: 5px 10px;
+    width: 9%;
+    padding: 2px 0px 2px 0px;
     margin-left: -1px;
     border: #aaa solid 1px;
     border-right: none;
@@ -124,27 +124,4 @@
     color: maroon;
     margin-top: 6px;
     font-family: "Source Sans Pro", Arial, sans-serif;
-}
-
-.runnerup {
-    margin-top: 20px;
-}
-.red, .blue, .green, .none {
-    float: left;
-    width: 14px;
-    height: 14px;
-    margin-right: 4px;
-    border: 1px solid #333;
-}
-.red {
-    background: #FF2121;
-}
-.blue {
-    background: #3421FF;
-}
-.green {
-    background: #49CF32;
-}
-.none {
-    background: #fff;
 }

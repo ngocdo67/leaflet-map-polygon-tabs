@@ -25,17 +25,6 @@ $(function() {
    };
  }
 
-
-
-//  var geojson;
-//  makeMap(style);
-//  function makeMap(theStyle) {
-//   geojson = L.geoJson(cityData, {
-//     style: theStyle,
-//     onEachFeature: onEachFeature
-//   }).addTo(map);
-// }
-
 // Edit to upload GeoJSON data file from your local directory; removed var = geoJsonLayer since this is declared above
 $.getJSON("towns-index.geojson", function (data) {
   geoJsonLayer = L.geoJson(data, {
