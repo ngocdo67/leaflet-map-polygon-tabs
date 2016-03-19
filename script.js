@@ -88,8 +88,8 @@ info.update = function (props) {
 info.addTo(map);
 
 // Check this
-$(".toolItem").click(function() {
-  $(".toolItem").removeClass("selected");
+$(".tabItem").click(function() {
+  $(".tabItem").removeClass("selected");
   $(this).addClass("selected");
   // year = $(this).html().split("-")[1];  /* for school years */
   year = $(this).html();

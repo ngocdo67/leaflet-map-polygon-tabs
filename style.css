@@ -21,10 +21,11 @@
     width: 100%;
     height: 100%;
 }
-.toolHeader {
+/*is this used?*/
+.tabHeader {
     font-weight: bold;
 }
-.toolbar {
+.tabBar {
     float: left;
     width: 100%;
     margin-bottom: 10px;
@@ -32,7 +33,7 @@
     display: table-row;
 }
 /* tab width control ; clean up all details later*/
-.toolItem {
+.tabItem {
     float: left;
     width: 9%;
     padding: 2px 0px 2px 0px;
@@ -47,21 +48,21 @@
     color: #ccc;
     display: table-cell;
 }
-.toolItem:first-child {
+.tabItem:first-child {
     border-radius: 7px 0px 0 7px;
     border-top-left-radius: 2px;
     border-bottom-left-radius: 2px;
 }
-.toolItem:last-child {
+.tabItem:last-child {
     border-radius: 0px 7px 7px 0px;
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
     border-right: 1px solid #aaa;
 }
-.toolItem:hover {
+.tabItem:hover {
     color: #E34B4B;
 }
-.toolItem.selected {
+.tabItem.selected {
     color: maroon;
     background: #eee;
     box-shadow: inset 1px 1px 7px -2px #555;
