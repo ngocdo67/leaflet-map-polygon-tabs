@@ -8,3 +8,5 @@ http://jackdougherty.github.io/leaflet-map-polygon-tabs
 
 Map design by Connecticut Mirror http://ctmirror.org
 
+## limitations
+- legend displays only numerical ranges, not text values

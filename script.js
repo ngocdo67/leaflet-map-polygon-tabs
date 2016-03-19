@@ -25,14 +25,15 @@ $.getJSON("town-home-value-index.geojson", function (data) {
   }).addTo(map);
 });
 
-// Edit ranges and colors to match your data; see http://colorbrewer.org
+// Edit range cutoffs and colors to match your data; see http://colorbrewer.org
+// In this example, any values not in the ranges above displays as white
 function getColor(d) {
   return d > 2.0 ? '#006d2c' :
          d > 1.5 ? '#2ca25f' :
          d > 1.0 ? '#66c2a4' :
          d > 0.5 ? '#b2e2e2' :
          d > 0.1 ? '#edf8fb' :
-                   '#ffffff' ;
+                   'white' ;
 }
 
 // Edit the getColor property to match data properties in your GeoJSON file
@@ -85,7 +86,7 @@ info.onAdd = function (map) {
 info.update = function (props) {
   var winName =
   this._div.innerHTML = (props ?
-    '<div class="townName">' + props.town + '</div>' : '<div class="townName faded">Hover over towns</div>') + '<div class="labelItem"><div class="rightLabel">Home Value Index</div>' +(props ? '' + (checkNull(props["index" + year])) : '--') + '</div>';
+    '<div class="areaName">' + props.town + '</div>' : '<div class="areaName faded">Hover over areas</div>') + '<div class="areaLabel"><div class="areaValue">Home Value Index</div>' +(props ? '' + (checkNull(props["index" + year])) : '--') + '</div>';
 };
 
 info.addTo(map);
@@ -98,6 +99,31 @@ $(".tabItem").click(function() {
   // year = $(this).html().split("-")[1];  /* use for school years, eg 2010-11 */
   geoJsonLayer.setStyle(style);
 });
+
+var legend = L.control({position: 'bottomright'});
+
+// Modify grades to match the range cutoffs inserted above
+// In this example, the last grade will appear as "2+"
+legend.onAdd = function (map) {
+  var div = L.DomUtil.create('div', 'info legend'),
+    grades = [0.1, 0.5, 1.0, 1.5, 2],
+    labels = [],
+    from, to;
+
+  for (var i = 0; i < grades.length; i++) {
+    from = grades[i];
+    to = grades[i + 1];
+
+    labels.push(
+      '<i style="background:' + getColor(from + 1) + '"></i> ' +
+      from + (to ? '&ndash;' + to : '+'));
+  }
+
+  div.innerHTML = labels.join('<br>');
+  return div;
+};
+
+legend.addTo(map);
 
 // In info.update, this checks if GeoJSON data contains a null value, and if so displays "--"
 function checkNull(val) {
