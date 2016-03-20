@@ -1,5 +1,5 @@
 # leaflet-map-polygon-tabs
-Leaflet thematic polygon map with tabs
+Leaflet thematic polygon map, with hover info, tabs to display time periods, and data drawn from GeoJSON file
 
 ## Demo
 http://jackdougherty.github.io/leaflet-map-polygon-tabs
@@ -9,7 +9,7 @@ http://jackdougherty.github.io/leaflet-map-polygon-tabs
 
 ## Limitations
 - legend displays only numerical ranges, not text values
-- 
+
 ## Create your own
 - see Leaflet templates section of *Data Visualization for All* book http://datavizforall.org
 
