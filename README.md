@@ -2,7 +2,7 @@
 Leaflet thematic polygon map, with hover info, tabs to display time periods, and data drawn from GeoJSON file
 
 ## Demo
-http://jackdougherty.github.io/leaflet-map-polygon-tabs
+http://ngocdo67.github.io/leaflet-map-polygon-tabs
 
 ## Credits
 - Map design by Connecticut Mirror http://ctmirror.org
